@@ -136,10 +136,10 @@ CREATE PROCEDURE `creationUser`(
 ) 
 BEGIN 
 START TRANSACTION;
-	IF (SELECT id_utilisateur FROM utilisateur WHERE email = new_email ) > 0 THEN ROLLBACK; 
+	IF (SELECT id_users FROM users WHERE email = new_email ) > 0 THEN ROLLBACK; 
 		SIGNAL SQLSTATE '10000' SET MESSAGE_TEXT = 'Le compte existe déjà en BDD';
 	ELSE 
-		INSERT INTO utilisateur(firstname, lastname, email, `password`) 
+		INSERT INTO users (firstname, lastname, email, `password`) 
 		VALUE(new_firstname, new_lastname, new_email, new_password); 
 		COMMIT; 
 	END IF; 
